@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favre Business — Multi-Language Site (EN/DE/RU)</title>
+    
+    <!-- ИСПРАВЛЕНИЕ FOUC: Сначала устанавливаем базовый темный фон для body, чтобы избежать белой вспышки -->
+    <style>
+        body {
+            /* Базовый цвет из градиента для моментального старта */
+            background-color: #1F252C;
+            color: #F7F8FA;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        /* Остальные стили из вашего макета */
+        body {
+            background: linear-gradient(90deg, #1F252C 0%, #343B45 100%);
+        }
+        
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: #F9C314;
+            color: #1F252C;
+            border-radius: 12px;
+            transition: background 0.3s ease-in-out, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(249, 195, 20, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #E3AE05;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, .25);
+            color: #F7F8FA;
+            border-radius: 12px;
+            transition: background 0.3s ease-in-out, border-color 0.3s, transform 0.1s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #F9C314;
+            transform: translateY(-1px);
+        }
+
+        /* Обновление стиля для круга: теперь содержит логотип, а не портрет */
+        .hero-circle {
+            border-radius: 50%;
+            border: 6px solid #F9C314;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Обрезка содержимого внутри круга */
+        }
+        
+        .hero-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0; /* Убираем лишний border-radius, так как он уже есть у контейнера */
+            border: none;
+            box-shadow: none;
+        }
+        
+        .badge-pill {
+            background: #F9C314;
+            color: #1F252C;
+            border-radius: 999px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            display: inline-block;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            box-shadow: 0 2px 8px rgba(249, 195, 20, 0.5);
+        }
+
+        .card-transparent {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease-in-out, border-color 0.3s;
+        }
+        .card-transparent:hover {
+            background-color: rgba(249, 195, 20, 0.05);
+            border-color: rgba(249, 195, 20, 0.3);
+        }
+
+        /* Responsive Padding Utilities */
+        .section-py {
+            padding-top: 3rem; /* 48px mobile */
+            padding-bottom: 3rem; /* 48px mobile */
+        }
+        @media (min-width: 768px) {
+            .section-py {
+                padding-top: 5rem; /* 80px desktop */
+                padding-bottom: 5rem; /* 80px desktop */
+            }
+        }
+    </style>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts (Playfair Display and Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900;0,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body> 
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Language Selector Header -->
+    <header class="py-6 flex justify-between items-center sticky top-0 z-10 bg-[#1F252C] bg-opacity-95 backdrop-blur-sm">
+        <h1 class="text-2xl font-bold text-yellow-500 font-['Playfair_Display']">Favre Business</h1>
+        <div class="flex space-x-2">
+            <button onclick="switchLanguage('en')" class="text-sm font-semibold p-2 rounded-lg transition-colors duration-200" id="lang-btn-en">EN</button>
+            <button onclick="switchLanguage('de')" class="text-sm font-semibold p-2 rounded-lg transition-colors duration-200" id="lang-btn-de">DE</button>
+            <button onclick="switchLanguage('ru')" class="text-sm font-semibold p-2 rounded-lg transition-colors duration-200" id="lang-btn-ru">RU</button>
+        </div>
+    </header>
+    
+    <!-- MAIN CONTENT CONTAINERS (Hidden/Shown by JS) -->
+
+    <!-- ========================================================================================================= -->
+    <!--                                                     ENGLISH CONTENT                                         -->
+    <!-- ========================================================================================================= -->
+    <div id="content-en" class="language-content">
+        
+        <!-- 1. Hero section EN -->
+        <section id="hero-en" class="section-py min-h-screen flex items-center pt-0 md:pt-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center w-full">
+                <div class="order-2 md:order-1">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6">
+                        COMPANY FORMATION<br>
+                        ACCOUNTING<br>
+                        TAX SERVICES
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg">
+                        Professional accounting and legal support for private individuals and businesses across Switzerland. Online or in person in Zug.
+                    </p>
+                    <div class="mb-8">
+                        <span class="badge-pill">
+                            🟡 Free 20-minute consultation
+                        </span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+                        <a href="#contact-en" class="btn-primary px-8 py-3 text-lg font-bold text-center">
+                            Book Free Consultation
+                        </a>
+                        <a href="#prices-en" class="btn-outline px-8 py-3 text-lg font-bold text-center">
+                            See Prices
+                        </a>
+                    </div>
+                    <div class="text-sm text-gray-400 font-mono">
+                        <p class="mb-1">
+                            <span class="mr-6">📞 +41 79 108 6000</span>
+                            <span>+41 76 769 9909</span>
+                        </p>
+                        <p>
+                            <span class="mr-6">🌐 favre-business.ch</span>
+                            <span>business-progress.com</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center md:justify-end">
+                    <div class="hero-circle w-80 h-80 sm:w-96 sm:h-96 p-2">
+                        <!-- Замена: Портрет на логотип -->
+                        <img 
+                            src="image_fb27ac.jpg" 
+                            alt="Favre Business Logo (FB monogram on shield)" 
+                            class="object-cover"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Services EN (No change) -->
+        <section id="services-en" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Our Services</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="calculator" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Bookkeeping</h3><p class="text-gray-300">Full financial accounting, annual reports, VAT.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="wallet" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Tax Services</h3><p class="text-gray-300">Tax advice, optimization, and declarations.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="users" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Payroll & HR</h3><p class="text-gray-300">Payroll runs, social insurance, pension fund.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="building" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Company Formation</h3><p class="text-gray-300">Legal form, registration, domicile, external board mandates.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="gavel" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Legal Support (light)</h3><p class="text-gray-300">Contracts, invoice disputes, correspondence with authorities.</p></div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#contact-en" class="btn-primary px-10 py-3 text-lg font-bold">
+                    Request a quote
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. About Us EN -->
+        <section id="about-en" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">About Favre Business</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        **Olga Favre** — Certified Swiss accountant and tax specialist with 15+ years of practice. Focused on SMEs and international company owners.
+                    </p>
+                    <p class="text-lg mb-8 leading-relaxed">
+                        Languages: English, German, Russian. Approach: clear explanations, strict deadlines, only necessary hours.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="check-circle" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">200+ tax declarations per year</p></div>
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="clock" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">48-hour response time</p></div>
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="handshake" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">Fixed hourly rates, no surprises</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Case Studies EN (No change) -->
+        <section id="cases-en" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Case Studies</h2>
+            <div class="space-y-12 max-w-4xl mx-auto">
+                <div class="card-transparent p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Accounting Backlog Cleanup</h3>
+                    <p class="text-lg mb-2"><strong class="text-gray-200">Client:</strong> SME in Zug — accounting backlog (12 months).</p>
+                    <p class="text-lg mb-4"><strong class="text-gray-200">Solution:</strong> Rebuilt books + VAT corrections.</p>
+                    <p class="text-xl font-bold text-yellow-500">Result: On-time submission, CHF 8,300 VAT recovered.</p>
+                </div>
+                <div class="card-transparent p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Freelancer Tax Optimization</h3>
+                    <p class="text-lg mb-2"><strong class="text-gray-200">Client:</strong> Freelancer in Zurich — tax optimization.</p>
+                    <p class="text-lg mb-4"><strong class="text-gray-200">Solution:</strong> 3a pillar deductions + simplified filing.</p>
+                    <p class="text-xl font-bold text-yellow-500">Result: Tax reduced by 18%.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Prices EN (No change) -->
+        <section id="prices-en" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Our Rates</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="card-transparent p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-500">Single Consultation</h3>
+                    <p class="text-gray-300 mb-4">Tax questions, deadlines, or document checks</p>
+                    <div class="text-xl font-bold border-t border-gray-700/50 pt-4">from CHF 250 / hour</div>
+                </div>
+                <div class="card-transparent p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-500">Ongoing Services (SMEs)</h3>
+                    <p class="text-gray-300 mb-4">Bookkeeping, payroll, VAT, annual reports</p>
+                    <div class="text-xl font-bold border-t border-gray-700/50 pt-4">from CHF 180 / hour</div>
+                </div>
+                <div class="text-center pt-8">
+                    <p class="text-xl text-gray-300 mb-4">Ready to discuss your needs?</p>
+                    <a href="#contact-en" class="btn-primary px-10 py-3 text-lg font-bold">
+                        Get a quote in 24 hours
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAQ EN (No change) -->
+        <section id="faq-en" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">Q: How do we start?</h3><p class="text-gray-300">A: Send us a short message — we’ll review your documents and suggest next steps.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">Q: Remote collaboration possible?</h3><p class="text-gray-300">A: Yes. Secure file exchange via cloud, signature via post or video call.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">Q: Which languages do you work in?</h3><p class="text-gray-300">A: English, German, and Russian.</p></div>
+            </div>
+        </section>
+
+        <!-- 7. Contact EN (No change) -->
+        <section id="contact-en" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Get in touch</h2>
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Contact Details</h3>
+                    <div class="space-y-3 text-lg">
+                        <p class="flex items-center"><i data-lucide="phone" class="w-5 h-5 text-yellow-500 mr-3"></i><span>+41 79 108 6000</span></p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 text-yellow-500 mr-3"></i><span>favre@favre-business.ch</span></p>
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 text-yellow-500 mr-3 mt-1"></i><span>Dorfplatz 4, 6330 Cham, Switzerland</span></p>
+                    </div>
+                </div>
+                <div class="card-transparent p-8 rounded-xl">
+                    <form onsubmit="event.preventDefault(); showConfirmation('en');">
+                        <div class="space-y-6">
+                            <div><label for="name-en" class="block text-sm font-medium mb-2">Name *</label><input type="text" id="name-en" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="Your Name"></div>
+                            <div><label for="email-en" class="block text-sm font-medium mb-2">Email *</label><input type="email" id="email-en" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="your@email.com"></div>
+                            <div><label for="phone-en" class="block text-sm font-medium mb-2">Phone</label><input type="tel" id="phone-en" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="+41 79 123 4567"></div>
+                            <div>
+                                <label for="help_with-en" class="block text-sm font-medium mb-2">I need help with: *</label>
+                                <select id="help_with-en" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500 appearance-none">
+                                    <option value="" disabled selected>Select a Service</option>
+                                    <option value="Accounting">Accounting</option><option value="Taxes">Taxes</option><option value="Payroll">Payroll</option><option value="Company setup">Company setup</option><option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div><label for="message-en" class="block text-sm font-medium mb-2">Message</label><textarea id="message-en" rows="4" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="How can we assist you?"></textarea></div>
+                            <div class="flex items-center"><input type="checkbox" id="data_policy-en" required class="rounded text-yellow-500 focus:ring-yellow-500 bg-gray-700 border-gray-600"><label for="data_policy-en" class="ml-2 block text-sm">I agree to the data processing policy.</label></div>
+                            <button type="submit" class="btn-primary w-full px-8 py-3 text-lg font-bold mt-4">Send message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Footer EN (No change) -->
+        <footer class="mt-20 border-t border-gray-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center text-sm">
+                <div class="space-x-4 mb-4">
+                    <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-150">Privacy Policy</a>
+                    <span class="text-gray-600">•</span>
+                    <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-150">Imprint</a>
+                </div>
+                <p class="text-gray-500">© Favre Business 2025 | All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+    <!-- END ENGLISH CONTENT -->
+
+
+    <!-- ========================================================================================================= -->
+    <!--                                                     GERMAN CONTENT                                          -->
+    <!-- ========================================================================================================= -->
+    <div id="content-de" class="language-content hidden">
+
+        <!-- 1. Hero section DE -->
+        <section id="hero-de" class="section-py min-h-screen flex items-center pt-0 md:pt-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center w-full">
+                <div class="order-2 md:order-1">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6">
+                        UNTERNEHMENSGRÜNDUNG<br>
+                        BUCHHALTUNG<br>
+                        STEUERBERATUNG
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg">
+                        Professionelle Buchhaltungs- und Rechtsberatung für Privatpersonen und Unternehmen in der ganzen Schweiz. Online oder persönlich in Zug.
+                    </p>
+                    <div class="mb-8">
+                        <span class="badge-pill">
+                            🟡 Kostenlose 20-minütige Beratung
+                        </span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+                        <a href="#contact-de" class="btn-primary px-8 py-3 text-lg font-bold text-center">
+                            Kostenlose Beratung buchen
+                        </a>
+                        <a href="#prices-de" class="btn-outline px-8 py-3 text-lg font-bold text-center">
+                            Preise ansehen
+                        </a>
+                    </div>
+                    <div class="text-sm text-gray-400 font-mono">
+                        <p class="mb-1">
+                            <span class="mr-6">📞 +41 79 108 6000</span>
+                            <span>+41 76 769 9909</span>
+                        </p>
+                        <p>
+                            <span class="mr-6">🌐 favre-business.ch</span>
+                            <span>business-progress.com</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center md:justify-end">
+                    <div class="hero-circle w-80 h-80 sm:w-96 sm:h-96 p-2">
+                        <!-- Замена: Портрет на логотип -->
+                        <img 
+                            src="image_fb27ac.jpg" 
+                            alt="Favre Business Logo (FB monogram on shield)" 
+                            class="object-cover"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Services DE (No change) -->
+        <section id="services-de" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Unsere Dienstleistungen</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="calculator" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Buchhaltung</h3><p class="text-gray-300">Vollständige Finanzbuchhaltung, Jahresabschlüsse, Mehrwertsteuer (MWST).</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="wallet" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Steuerdienstleistungen</h3><p class="text-gray-300">Steuerberatung, Optimierung und Steuererklärungen.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="users" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Lohnbuchhaltung & Personalwesen</h3><p class="text-gray-300">Lohnläufe, Sozialversicherungen, Pensionskasse.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="building" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Firmengründung</h3><p class="text-gray-300">Rechtsform, Registrierung, Domizil, externe Verwaltungsratsmandate.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="gavel" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Rechtsberatung (light)</h3><p class="text-gray-300">Verträge, Rechnungsstreitigkeiten, Korrespondenz mit Behörden.</p></div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#contact-de" class="btn-primary px-10 py-3 text-lg font-bold">
+                    Angebot anfordern
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. About Us DE -->
+        <section id="about-de" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Über Favre Business</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        **Olga Favre** — Zertifizierte Schweizer Buchhalterin und Steuerspezialistin mit über 15 Jahren Berufserfahrung. Fokus auf KMUs und internationale Unternehmenseigentümer.
+                    </p>
+                    <p class="text-lg mb-8 leading-relaxed">
+                        Sprachen: Deutsch, Englisch, Russisch. Ansatz: klare Erklärungen, strikte Termineinhaltung, nur notwendige Stunden.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="check-circle" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">Über 200 Steuererklärungen pro Jahr</p></div>
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="clock" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">48 Stunden Reaktionszeit</p></div>
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="handshake" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">Feste Stundensätze, keine Überraschungen</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Case Studies DE (No change) -->
+        <section id="cases-de" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Fallstudien</h2>
+            <div class="space-y-12 max-w-4xl mx-auto">
+                <div class="card-transparent p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Buchhaltungsrückstand</h3>
+                    <p class="text-lg mb-2"><strong class="text-gray-200">Kunde:</strong> KMU in Zug — Buchhaltungsrückstand (12 Monate).</p>
+                    <p class="text-lg mb-4"><strong class="text-gray-200">Lösung:</strong> Wiederaufbau der Bücher + MWST-Korrekturen.</p>
+                    <p class="text-xl font-bold text-yellow-500">Ergebnis: Rechtzeitige Einreichung, CHF 8'300 MWST zurückerstattet.</p>
+                </div>
+                <div class="card-transparent p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Freiberufler Steueroptimierung</h3>
+                    <p class="text-lg mb-2"><strong class="text-gray-200">Kunde:</strong> Freiberufler in Zürich — Steueroptimierung.</p>
+                    <p class="text-lg mb-4"><strong class="text-gray-200">Lösung:</strong> 3a-Säule-Abzüge + vereinfachte Einreichung.</p>
+                    <p class="text-xl font-bold text-yellow-500">Ergebnis: Steuer um 18% reduziert.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Prices DE (No change) -->
+        <section id="prices-de" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Unsere Tarife</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="card-transparent p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-500">Einzelberatung</h3>
+                    <p class="text-gray-300 mb-4">Steuerfragen, Fristen oder Dokumentenprüfungen</p>
+                    <div class="text-xl font-bold border-t border-gray-700/50 pt-4">ab CHF 250 / Stunde</div>
+                </div>
+                <div class="card-transparent p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-500">Laufende Dienstleistungen (KMUs)</h3>
+                    <p class="text-gray-300 mb-4">Buchhaltung, Lohnbuchhaltung, MWST, Jahresberichte</p>
+                    <div class="text-xl font-bold border-t border-gray-700/50 pt-4">ab CHF 180 / Stunde</div>
+                </div>
+                <div class="text-center pt-8">
+                    <p class="text-xl text-gray-300 mb-4">Bereit, Ihre Bedürfnisse zu besprechen?</p>
+                    <a href="#contact-de" class="btn-primary px-10 py-3 text-lg font-bold">
+                        Angebot in 24 Stunden erhalten
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAQ DE (No change) -->
+        <section id="faq-de" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Häufig gestellte Fragen</h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">F: Wie fangen wir an?</h3><p class="text-gray-300">A: Senden Sie uns eine kurze Nachricht – wir prüfen Ihre Unterlagen und schlagen die nächsten Schritte vor.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">F: Ist eine Fernzusammenarbeit möglich?</h3><p class="text-gray-300">A: Ja. Sicherer Dateiaustausch über die Cloud, Unterschrift per Post oder Videoanruf.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">F: In welchen Sprachen arbeiten Sie?</h3><p class="text-gray-300">A: Deutsch, Englisch und Russisch.</p></div>
+            </div>
+        </section>
+
+        <!-- 7. Contact DE (No change) -->
+        <section id="contact-de" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Kontaktieren Sie uns</h2>
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Kontaktdaten</h3>
+                    <div class="space-y-3 text-lg">
+                        <p class="flex items-center"><i data-lucide="phone" class="w-5 h-5 text-yellow-500 mr-3"></i><span>+41 79 108 6000</span></p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 text-yellow-500 mr-3"></i><span>favre@favre-business.ch</span></p>
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 text-yellow-500 mr-3 mt-1"></i><span>Dorfplatz 4, 6330 Cham, Schweiz</span></p>
+                    </div>
+                </div>
+                <div class="card-transparent p-8 rounded-xl">
+                    <form onsubmit="event.preventDefault(); showConfirmation('de');">
+                        <div class="space-y-6">
+                            <div><label for="name-de" class="block text-sm font-medium mb-2">Name *</label><input type="text" id="name-de" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="Ihr Name"></div>
+                            <div><label for="email-de" class="block text-sm font-medium mb-2">E-Mail *</label><input type="email" id="email-de" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="ihre@email.com"></div>
+                            <div><label for="phone-de" class="block text-sm font-medium mb-2">Telefon</label><input type="tel" id="phone-de" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="+41 79 123 4567"></div>
+                            <div>
+                                <label for="help_with-de" class="block text-sm font-medium mb-2">Ich benötige Hilfe bei: *</label>
+                                <select id="help_with-de" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500 appearance-none">
+                                    <option value="" disabled selected>Wählen Sie eine Dienstleistung</option>
+                                    <option value="Accounting">Buchhaltung</option><option value="Taxes">Steuern</option><option value="Payroll">Lohnbuchhaltung</option><option value="Company setup">Firmengründung</option><option value="Other">Sonstiges</option>
+                                </select>
+                            </div>
+                            <div><label for="message-de" class="block text-sm font-medium mb-2">Nachricht</label><textarea id="message-de" rows="4" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="Wie können wir Ihnen helfen?"></textarea></div>
+                            <div class="flex items-center"><input type="checkbox" id="data_policy-de" required class="rounded text-yellow-500 focus:ring-yellow-500 bg-gray-700 border-gray-600"><label for="data_policy-de" class="ml-2 block text-sm">Ich stimme der Datenverarbeitungsrichtlinie zu.</label></div>
+                            <button type="submit" class="btn-primary w-full px-8 py-3 text-lg font-bold mt-4">Nachricht senden</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Footer DE (No change) -->
+        <footer class="mt-20 border-t border-gray-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center text-sm">
+                <div class="space-x-4 mb-4">
+                    <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-150">Datenschutzerklärung</a>
+                    <span class="text-gray-600">•</span>
+                    <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-150">Impressum</a>
+                </div>
+                <p class="text-gray-500">© Favre Business 2025 | Alle Rechte vorbehalten.</p>
+            </div>
+        </footer>
+
+    </div>
+    <!-- END GERMAN CONTENT -->
+
+    <!-- ========================================================================================================= -->
+    <!--                                                    RUSSIAN CONTENT                                        -->
+    <!-- ========================================================================================================= -->
+    <div id="content-ru" class="language-content hidden">
+
+        <!-- 1. Hero section RU -->
+        <section id="hero-ru" class="section-py min-h-screen flex items-center pt-0 md:pt-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center w-full">
+                <div class="order-2 md:order-1">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6">
+                        УЧРЕЖДЕНИЕ КОМПАНИЙ<br>
+                        БУХГАЛТЕРИЯ<br>
+                        НАЛОГОВЫЕ УСЛУГИ
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg">
+                        Профессиональная бухгалтерская и юридическая поддержка частных лиц и компаний по всей Швейцарии. Онлайн или лично в Цуге.
+                    </p>
+                    <div class="mb-8">
+                        <span class="badge-pill">
+                            🟡 Бесплатная 20-минутная консультация
+                        </span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+                        <a href="#contact-ru" class="btn-primary px-8 py-3 text-lg font-bold text-center">
+                            Записаться на консультацию
+                        </a>
+                        <a href="#prices-ru" class="btn-outline px-8 py-3 text-lg font-bold text-center">
+                            Посмотреть цены
+                        </a>
+                    </div>
+                    <div class="text-sm text-gray-400 font-mono">
+                        <p class="mb-1">
+                            <span class="mr-6">📞 +41 79 108 6000</span>
+                            <span>+41 76 769 9909</span>
+                        </p>
+                        <p>
+                            <span class="mr-6">🌐 favre-business.ch</span>
+                            <span>business-progress.com</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center md:justify-end">
+                    <div class="hero-circle w-80 h-80 sm:w-96 sm:h-96 p-2">
+                        <!-- Замена: Портрет на логотип -->
+                        <img 
+                            src="image_fb27ac.jpg" 
+                            alt="Логотип Favre Business (монограмма FB на щите)" 
+                            class="object-cover"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Services RU (No change) -->
+        <section id="services-ru" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Наши Услуги</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="calculator" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Бухгалтерский учет</h3><p class="text-gray-300">Полный финансовый учет, годовые отчеты, НДС.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="wallet" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Налоговые услуги</h3><p class="text-gray-300">Налоговое консультирование, оптимизация и декларации.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="users" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Расчет ЗП и HR</h3><p class="text-gray-300">Расчет заработной платы, социальное страхование, пенсионный фонд.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="building" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Учреждение компаний</h3><p class="text-gray-300">Юридическая форма, регистрация, домициль, внешние мандаты совета директоров.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><i data-lucide="gavel" class="w-8 h-8 text-yellow-500 mb-4"></i><h3 class="text-xl font-semibold mb-2">Юридическая поддержка (легкая)</h3><p class="text-gray-300">Контракты, споры по счетам, переписка с государственными органами.</p></div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#contact-ru" class="btn-primary px-10 py-3 text-lg font-bold">
+                    Запросить ценовое предложение
+                </a>
+            </div>
+        </section>
+
+        <!-- 3. About Us RU -->
+        <section id="about-ru" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">О Favre Business</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        **Olga Favre** — Сертифицированный швейцарский бухгалтер и налоговый специалист с более чем 15-летним опытом работы. Фокусируется на малых и средних предприятиях (KMU) и владельцах международных компаний.
+                    </p>
+                    <p class="text-lg mb-8 leading-relaxed">
+                        Языки: Английский, Немецкий, Русский. Подход: четкие объяснения, строгое соблюдение сроков, только необходимое время работы.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="check-circle" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">200+ налоговых деклараций в год</p></div>
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="clock" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">48 часов время ответа</p></div>
+                    <div class="p-6 card-transparent rounded-xl flex items-center space-x-4"><i data-lucide="handshake" class="w-6 h-6 text-yellow-500 flex-shrink-0"></i><p class="text-xl font-semibold">Фиксированные почасовые ставки, никаких сюрпризов</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Case Studies RU (No change) -->
+        <section id="cases-ru" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Кейсы / Примеры Работы</h2>
+            <div class="space-y-12 max-w-4xl mx-auto">
+                <div class="card-transparent p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Устранение задолженности по бухгалтерии</h3>
+                    <p class="text-lg mb-2"><strong class="text-gray-200">Клиент:</strong> KMU в Цуге — задолженность по бухгалтерии (12 месяцев).</p>
+                    <p class="text-lg mb-4"><strong class="text-gray-200">Решение:</strong> Восстановление учета + корректировки НДС.</p>
+                    <p class="text-xl font-bold text-yellow-500">Результат: Своевременная подача, возвращено CHF 8'300 НДС.</p>
+                </div>
+                <div class="card-transparent p-8 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Оптимизация налогов для фрилансера</h3>
+                    <p class="text-lg mb-2"><strong class="text-gray-200">Клиент:</strong> Фрилансер в Цюрихе — оптимизация налогов.</p>
+                    <p class="text-lg mb-4"><strong class="text-gray-200">Решение:</strong> Вычеты по 3-й опоре (3a) + упрощенная подача.</p>
+                    <p class="text-xl font-bold text-yellow-500">Результат: Налог снижен на 18%.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Prices RU (No change) -->
+        <section id="prices-ru" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Наши Тарифы</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="card-transparent p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-500">Разовая консультация</h3>
+                    <p class="text-gray-300 mb-4">Налоговые вопросы, сроки или проверка документов</p>
+                    <div class="text-xl font-bold border-t border-gray-700/50 pt-4">от CHF 250 / час</div>
+                </div>
+                <div class="card-transparent p-6 rounded-xl">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-500">Постоянное обслуживание (KMU)</h3>
+                    <p class="text-gray-300 mb-4">Бухгалтерия, расчет ЗП, НДС, годовые отчеты</p>
+                    <div class="text-xl font-bold border-t border-gray-700/50 pt-4">от CHF 180 / час</div>
+                </div>
+                <div class="text-center pt-8">
+                    <p class="text-xl text-gray-300 mb-4">Готовы обсудить ваши потребности?</p>
+                    <a href="#contact-ru" class="btn-primary px-10 py-3 text-lg font-bold">
+                        Получить предложение за 24 часа
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. FAQ RU (No change) -->
+        <section id="faq-ru" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Часто задаваемые вопросы</h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">В: Как начать?</h3><p class="text-gray-300">О: Отправьте нам короткое сообщение — мы проверим ваши документы и предложим следующие шаги.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">В: Возможна ли удаленная работа?</h3><p class="text-gray-300">О: Да. Безопасный обмен файлами через облако, подписание по почте или видеозвонку.</p></div>
+                <div class="card-transparent p-6 rounded-xl"><h3 class="text-lg font-semibold mb-2">В: На каких языках вы работаете?</h3><p class="text-gray-300">О: Английский, Немецкий и Русский.</p></div>
+            </div>
+        </section>
+
+        <!-- 7. Contact RU (No change) -->
+        <section id="contact-ru" class="section-py border-t border-gray-700/50">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 text-center">Свяжитесь с нами</h2>
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Контактная информация</h3>
+                    <div class="space-y-3 text-lg">
+                        <p class="flex items-center"><i data-lucide="phone" class="w-5 h-5 text-yellow-500 mr-3"></i><span>+41 79 108 6000</span></p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 text-yellow-500 mr-3"></i><span>favre@favre-business.ch</span></p>
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 text-yellow-500 mr-3 mt-1"></i><span>Dorfplatz 4, 6330 Cham, Switzerland</span></p>
+                    </div>
+                </div>
+                <div class="card-transparent p-8 rounded-xl">
+                    <form onsubmit="event.preventDefault(); showConfirmation('ru');">
+                        <div class="space-y-6">
+                            <div><label for="name-ru" class="block text-sm font-medium mb-2">Имя *</label><input type="text" id="name-ru" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="Ваше Имя"></div>
+                            <div><label for="email-ru" class="block text-sm font-medium mb-2">Электронная почта *</label><input type="email" id="email-ru" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="vash@email.com"></div>
+                            <div><label for="phone-ru" class="block text-sm font-medium mb-2">Телефон</label><input type="tel" id="phone-ru" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="+41 79 123 4567"></div>
+                            <div>
+                                <label for="help_with-ru" class="block text-sm font-medium mb-2">Мне нужна помощь в: *</label>
+                                <select id="help_with-ru" required class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500 appearance-none">
+                                    <option value="" disabled selected>Выберите услугу</option>
+                                    <option value="Accounting">Бухгалтерия</option><option value="Taxes">Налоги</option><option value="Payroll">Расчет ЗП</option><option value="Company setup">Учреждение компании</option><option value="Other">Другое</option>
+                                </select>
+                            </div>
+                            <div><label for="message-ru" class="block text-sm font-medium mb-2">Сообщение</label><textarea id="message-ru" rows="4" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-yellow-500 focus:ring-yellow-500" placeholder="Чем мы можем вам помочь?"></textarea></div>
+                            <div class="flex items-center"><input type="checkbox" id="data_policy-ru" required class="rounded text-yellow-500 focus:ring-yellow-500 bg-gray-700 border-gray-600"><label for="data_policy-ru" class="ml-2 block text-sm">Я согласен с политикой обработки данных.</label></div>
+                            <button type="submit" class="btn-primary w-full px-8 py-3 text-lg font-bold mt-4">Отправить сообщение</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Footer RU (No change) -->
+        <footer class="mt-20 border-t border-gray-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center text-sm">
+                <div class="space-x-4 mb-4">
+                    <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-150">Политика конфиденциальности</a>
+                    <span class="text-gray-600">•</span>
+                    <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-150">Выходные данные</a>
+                </div>
+                <p class="text-gray-500">© Favre Business 2025 | Все права защищены.</p>
+            </div>
+        </footer>
+
+    </div>
+    <!-- END RUSSIAN CONTENT -->
+
+</div>
+
+<!-- Confirmation Modal (Localized) -->
+<div id="confirmation-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+    <!-- EN Modal Content -->
+    <div id="modal-en" class="modal-content-lang hidden bg-gray-800 p-8 rounded-xl max-w-sm w-full text-center shadow-2xl">
+        <i data-lucide="send" class="w-12 h-12 text-yellow-500 mx-auto mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Message Sent!</h3>
+        <p class="text-gray-300 mb-6">Thank you for reaching out. We will review your request and get back to you within 48 hours.</p>
+        <button onclick="closeConfirmation()" class="btn-primary px-6 py-2 font-bold">Close</button>
+    </div>
+    <!-- DE Modal Content -->
+    <div id="modal-de" class="modal-content-lang hidden bg-gray-800 p-8 rounded-xl max-w-sm w-full text-center shadow-2xl">
+        <i data-lucide="send" class="w-12 h-12 text-yellow-500 mx-auto mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Nachricht gesendet!</h3>
+        <p class="text-gray-300 mb-6">Vielen Dank für Ihre Nachricht. Wir werden Ihre Anfrage prüfen und uns innerhalb von 48 Stunden bei Ihnen melden.</p>
+        <button onclick="closeConfirmation()" class="btn-primary px-6 py-2 font-bold">Schließen</button>
+    </div>
+    <!-- RU Modal Content -->
+    <div id="modal-ru" class="modal-content-lang hidden bg-gray-800 p-8 rounded-xl max-w-sm w-full text-center shadow-2xl">
+        <i data-lucide="send" class="w-12 h-12 text-yellow-500 mx-auto mb-4"></i>
+        <h3 class="text-2xl font-bold mb-3">Сообщение отправлено!</h3>
+        <p class="text-gray-300 mb-6">Спасибо за обращение. Мы рассмотрим ваш запрос и свяжемся с вами в течение 48 часов.</p>
+        <button onclick="closeConfirmation()" class="btn-primary px-6 py-2 font-bold">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Default language setting
+    let currentLang = 'en';
+
+    /**
+     * Switches the displayed content and updates the URL hash.
+     * @param {string} langCode - 'en', 'de', or 'ru'.
+     */
+    function switchLanguage(langCode) {
+        currentLang = langCode;
+        
+        // 1. Hide all content and reset button styles
+        document.querySelectorAll('.language-content').forEach(div => {
+            div.classList.add('hidden');
+        });
+        document.querySelectorAll('[id^="lang-btn-"]').forEach(btn => {
+            btn.classList.remove('bg-gray-700/50', 'text-yellow-500');
+            btn.classList.add('text-gray-400');
+        });
+
+        // 2. Show the selected content and update button style
+        const activeContent = document.getElementById(`content-${langCode}`);
+        const activeButton = document.getElementById(`lang-btn-${langCode}`);
+
+        if (activeContent) {
+            activeContent.classList.remove('hidden');
+        }
+        if (activeButton) {
+            activeButton.classList.add('bg-gray-700/50', 'text-yellow-500');
+            activeButton.classList.remove('text-gray-400');
+        }
+
+        // 3. Update the URL hash (e.g., #de)
+        window.location.hash = langCode;
+
+        // 4. Scroll to the top of the content area (below the header)
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /**
+     * Shows the localized confirmation modal and resets the form.
+     * @param {string} langCode - 'en', 'de', or 'ru' for localization.
+     */
+    function showConfirmation(langCode) {
+        // Reset the specific form for the current language
+        const form = document.querySelector(`#contact-${langCode} form`);
+        if (form) {
+            form.reset();
+        }
+
+        // Hide all modal language versions
+        document.querySelectorAll('.modal-content-lang').forEach(div => {
+            div.classList.add('hidden');
+        });
+
+        // Show the localized modal content
+        const modalContent = document.getElementById(`modal-${langCode}`);
+        if (modalContent) {
+            modalContent.classList.remove('hidden');
+        }
+        
+        // Show the modal backdrop
+        document.getElementById('confirmation-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * Hides the confirmation modal.
+     */
+    function closeConfirmation() {
+        document.getElementById('confirmation-modal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        
+        // Optionally navigate to the contact section after closing the modal
+        const contactSection = document.getElementById(`contact-${currentLang}`);
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Initialize on load based on URL hash or default to English
+    window.onload = function() {
+        const hash = window.location.hash.substring(1);
+        const supportedLangs = ['en', 'de', 'ru'];
+        
+        if (hash && supportedLangs.includes(hash)) {
+            switchLanguage(hash);
+        } else {
+            switchLanguage('en');
+        }
+    };
+</script>
+
+</body>
+</html>
